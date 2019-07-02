@@ -1,0 +1,102 @@
+@font-face {
+  font-family: 'Helvetica';
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Roboto';
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Helvetica';
+  font-weight: 700;
+  font-style: normal; }
+@font-face {
+  font-family: 'Helvetica';
+  font-weight: 200;
+  font-style: normal; }
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-style: normal; }
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 200;
+  font-style: normal; }
+.body, .body-header, .body-m, .input-field::placeholder {
+  font-family: "Helvetica", "Roboto", sans-serif; }
+
+.body-header {
+  font-size: 3rem;
+  font-weight: 200;
+  text-align: center; }
+
+.body-m, .input-field::placeholder {
+  font-size: 2.5rem;
+  font-weight: 200; }
+
+.text-light {
+  color: #ffffff !important; }
+
+.input-field::placeholder {
+  color: #999999; }
+
+.btn-main {
+  border: 0;
+  display: block;
+  height: 8rem;
+  width: 24rem;
+  border-radius: 1rem;
+  background-color: rgba(92, 183, 92, 0.8); }
+
+.input-field {
+  width: 90vw;
+  height: 5rem;
+  border-radius: 1rem;
+  border: 0;
+  padding-left: 1rem; }
+
+.hero-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-position: top;
+  background-size: cover;
+  background-image: url("../assets/images/NZSunsetPetrVysohlid.jpeg");
+  z-index: -1000; }
+
+.pure-nz-logo-lg {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("../assets/images/100PureCenterAligned.svg");
+  background-size: contain;
+  background-repeat: no-repeat; }
+
+.pure-nz-logo-sm {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("../assets/images/100PureRightAligned.svg");
+  background-size: contain;
+  background-repeat: no-repeat; }
+
+.z-index-last {
+  z-index: -1000; }
+
+.landing-page-logo-layout {
+  height: 27rem;
+  margin-top: 20vh; }
+
+.t-r-logo-layout {
+  display: absolute;
+  margin-top: 2rem;
+  margin-left: 65vw;
+  height: 8rem; }
+
+.mt-40vh {
+  margin-top: 40vh; }
+
+.mt-10vh {
+  margin-top: 10vh; }
+
+/*# sourceMappingURL=master.css.map */

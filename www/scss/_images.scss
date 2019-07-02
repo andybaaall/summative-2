@@ -1,0 +1,28 @@
+
+.hero-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-position: top;
+  background-size: cover;
+  background-image: url('../assets/images/NZSunsetPetrVysohlid.jpeg');
+  z-index: -1000;
+}
+
+.pure-nz-logo-lg {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('../assets/images/100PureCenterAligned.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.pure-nz-logo-sm {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('../assets/images/100PureRightAligned.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
