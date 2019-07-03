@@ -23,5 +23,19 @@
 }
 
 .mt-10vh {
-  margin-top: 10vh; 
+  margin-top: 10vh;
+}
+
+.error-position {
+  position: absolute;
+  top: 78vh;
+  left: 10vw;
+  right: 10vw;
+}
+
+.error-close-icon-position {
+  display: absolute;
+  margin-left: 70vw;
+  height: 2.5rem;
+  width: 2.5rem;
 }

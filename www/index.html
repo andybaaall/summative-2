@@ -2,6 +2,10 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- this actually breaks all of the sizing? -->
+    <!-- which suggests that I need to switch from rem to % --> 
+
     <title>vehicle rental calculator homework</title>
 
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -39,13 +43,13 @@
         <div class="row mt-40vh">
           <div class="col-12 mt-5">
             <div class="row">
-              <label class="body-m text-light" for="people">How many people in your party?</label>
+              <label class="body-m text-light" for="people" >How many people in your party?</label>
             </div>
             <div class="row">
               <input id="people" class="input-field body-m my-4" type="number" name="people" placeholder="Please enter a value between 1 and 6"></input>
             </div>
             <div class="row">
-              <label class="body-m text-light" for="days">How many days are you travelling for?</label>
+              <label class="body-m text-light" for="days" >How many days are you travelling for?</label>
             </div>
             <div class="row mb-5">
               <input id="days" class="input-field body-m my-4" type="number" name="days" placeholder="Please enter a value between 1 and 15"></input>
@@ -56,6 +60,28 @@
           </div>
         </div>
       </div>
+
+      <!-- party error msg -->
+      <div id="partyError" class="button-box error-position mx-auto">
+        <div class="row">
+          <div id="errorClose" class="error-close-icon error-close-icon-position"></div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <p id="errorMsg" class="body-m text-light"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- journey inputs -->
+      <div id="mapDetails" class="">
+        <div class="row">
+          <div class="con">
+            <h3>i am a map</h3>
+          </div>
+        </div>
+      </div>
+
     </div>
 
 

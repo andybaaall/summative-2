@@ -14,3 +14,11 @@
   border: 0;
   padding-left: 1rem;
 }
+
+.button-box {
+  height: 15vh;
+  width: 80vw;
+  background-color: $button-box-color;
+  border-radius: 1rem;
+  padding: 2rem 2.5rem 2rem 2.5rem;
+}

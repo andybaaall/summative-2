@@ -55,6 +55,13 @@
   border: 0;
   padding-left: 1rem; }
 
+.button-box {
+  height: 15vh;
+  width: 80vw;
+  background-color: rgba(129, 119, 106, 0.8);
+  border-radius: 1rem;
+  padding: 2rem 2.5rem 2rem 2.5rem; }
+
 .hero-bg-img {
   position: absolute;
   top: 0;
@@ -66,19 +73,19 @@
   background-image: url("../assets/images/NZSunsetPetrVysohlid.jpeg");
   z-index: -1000; }
 
-.pure-nz-logo-lg {
+.logo, .pure-nz-logo-lg, .pure-nz-logo-sm, .error-close-icon {
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("../assets/images/100PureCenterAligned.svg");
-  background-size: contain;
-  background-repeat: no-repeat; }
+  background-size: contain; }
+
+.pure-nz-logo-lg {
+  background-image: url("../assets/images/100PureCenterAligned.svg"); }
 
 .pure-nz-logo-sm {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url("../assets/images/100PureRightAligned.svg");
-  background-size: contain;
-  background-repeat: no-repeat; }
+  background-image: url("../assets/images/100PureRightAligned.svg"); }
+
+.error-close-icon {
+  background-image: url("../assets/images/closeIcon.svg"); }
 
 .z-index-last {
   z-index: -1000; }
@@ -98,5 +105,17 @@
 
 .mt-10vh {
   margin-top: 10vh; }
+
+.error-position {
+  position: absolute;
+  top: 78vh;
+  left: 10vw;
+  right: 10vw; }
+
+.error-close-icon-position {
+  display: absolute;
+  margin-left: 70vw;
+  height: 2.5rem;
+  width: 2.5rem; }
 
 /*# sourceMappingURL=master.css.map */

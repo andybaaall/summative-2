@@ -11,18 +11,22 @@
   z-index: -1000;
 }
 
-.pure-nz-logo-lg {
+.logo {
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url('../assets/images/100PureCenterAligned.svg');
   background-size: contain;
-  background-repeat: no-repeat;
+}
+.pure-nz-logo-lg {
+  @extend .logo;
+  background-image: url('../assets/images/100PureCenterAligned.svg');
 }
 
 .pure-nz-logo-sm {
-  background-position: center;
-  background-repeat: no-repeat;
+  @extend .logo;
   background-image: url('../assets/images/100PureRightAligned.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
+}
+
+.error-close-icon {
+ @extend .logo;
+ background-image: url('../assets/images/closeIcon.svg');
 }

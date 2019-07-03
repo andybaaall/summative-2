@@ -1,4 +1,4 @@
-// available vehicles
+// all vehicles
 var cars = [
   {
     name: 'Motorbike',
@@ -46,10 +46,16 @@ var cars = [
   }
 ]
 
+// vehicles available to the user
+var availableCars = [];
+
+
 // inactive states on load
 $('#partyDetails').hide();
 $('#topRightLogo').hide();
 $('#partyNext').hide();
+$('#partyError').hide();
+$('#mapDetails').hide();
 
 
 // let's go btn
@@ -68,9 +74,10 @@ hasPeople = false;
 hasDays = false;
 
 function validate(owner , min , max){
-  var val = owner.value;
+  var val = parseInt(owner.value);
   if (val <= min || val >= max) {
-    console.log('please enter a number between ' + (min + 1) + ' and ' + (max - 1));
+    $('#partyError').show();
+    $('#errorMsg').html('Please enter a number between ' + (min + 1) + ' and ' + (max - 1) + ' in the \'how many ' + owner.id + '\' field.');
   } else {
     if (owner.id === 'people'){
       hasPeople = true;
@@ -91,28 +98,26 @@ days.addEventListener('change', function(){
   validate(days , 0 , 16);
 })
 
-// first 'next' button - goes to vehicle select
+// closes party details error message
+$('#errorClose').click(function(){
+  $('#partyError').hide();
+})
+
 var availableCars = [];
 
 // determines which cars are available based on party details
 document.getElementById('partyNext').addEventListener('click', function(){
-
   for (var i = 0; i < cars.length; i++) {
-
-    // if (people.value >= cars[i].minPeople){
-    //   console.log('got enough people for ' + cars[i].name);
-    // } else if (people.value === cars[i].maxPeople){
-    //   console.log('got too many people for ' + cars[i].name);
-    // }
-    // if (days.value >= cars[i].minDays){
-    //   console.log('got enough days for ' + cars[i].name);
-    // } else if (days.value >= cars[i].maxDays){
-    //   console.log('got too many days for ' + cars[i].name);
-    // }
-
-    console.log(cars[i].name + ' min people is ' + cars[i].minPeople);
-    console.log(cars[i].name + ' max people is ' + cars[i].maxPeople);
-    console.log(cars[i].name + ' min days is ' + cars[i].minDays);
-    console.log(cars[i].name + ' max days is ' + cars[i].maxDays);
+    if ((people.value >= cars[i].minPeople) && (people.value <= cars[i].maxPeople) && (days.value >= cars[i].minDays) && (days.value <= cars[i].maxDays)) {
+      availableCars.push(cars[i]);
+      $('#partyDetails').hide();
+      $('#mapDetails').show();
+    }
+  }
+  console.log(availableCars);
+  if (availableCars.length === 0){
+    $('#partyNext').hide();
+    $('#partyError').show();
+    $('#errorMsg').html('Sorry, but we can\'t find any vehicles that match your trip.');
   }
 })
