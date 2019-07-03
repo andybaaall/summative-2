@@ -121,3 +121,5 @@ document.getElementById('partyNext').addEventListener('click', function(){
     $('#errorMsg').html('Sorry, but we can\'t find any vehicles that match your trip.');
   }
 })
+
+console.log('this is a test commit log');
