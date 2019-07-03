@@ -56,6 +56,7 @@ $('#topRightLogo').hide();
 $('#partyNext').hide();
 $('#partyError').hide();
 $('#mapDetails').hide();
+$('#mapConfirm').hide();
 
 
 // let's go btn
@@ -67,7 +68,6 @@ $('#letsGo').click(function(){
 })
 
 // party details validation
-
 var people = document.getElementById('people');
 var days = document.getElementById('days');
 hasPeople = false;
@@ -103,8 +103,6 @@ $('#errorClose').click(function(){
   $('#partyError').hide();
 })
 
-var availableCars = [];
-
 // determines which cars are available based on party details
 document.getElementById('partyNext').addEventListener('click', function(){
   for (var i = 0; i < cars.length; i++) {
@@ -122,4 +120,17 @@ document.getElementById('partyNext').addEventListener('click', function(){
   }
 })
 
-console.log('this is a test commit log');
+// initialises map
+var map;
+
+function initMap(){
+  var center = {
+    lat: -40.900558,
+    lng: 174.885971
+  };
+
+  var map = new google.maps.Map(document.getElementById('map'), {zoom: 5, center: center});
+
+}
+
+// turns the input fields into objects that can be operated on by the map

@@ -2,9 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <!-- this actually breaks all of the sizing? -->
-    <!-- which suggests that I need to switch from rem to % --> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>vehicle rental calculator homework</title>
 
@@ -23,52 +21,49 @@
       <div id="landingPage">
         <div class="row">
           <div class="col-12">
-            <div class="pure-nz-logo-lg landing-page-logo-layout mb-3"></div>
+            <!-- logo goes here -->
           </div>
         </div>
         <div class="row">
           <div class="col mb-5">
-            <div class="body-header text-light mb-5">Your road trip starts here.</div>
+            <h3 class="">Your road trip starts here.</h3>
           </div>
         </div>
         <div class="row mt-5">
           <div class="col">
-            <button id="letsGo" class="btn-main body-m text-light text-align-center mx-auto" type="button" name="button">Let's go.</button>
+            <button id="letsGo" class="btn btn-round btn-lg btn-primary" type="button" name="button">Let's go.</button>
           </div>
         </div>
       </div>
 
       <!-- party input contents -->
       <div id="partyDetails">
-        <div class="row mt-40vh">
-          <div class="col-12 mt-5">
-            <div class="row">
-              <label class="body-m text-light" for="people" >How many people in your party?</label>
-            </div>
-            <div class="row">
-              <input id="people" class="input-field body-m my-4" type="number" name="people" placeholder="Please enter a value between 1 and 6"></input>
-            </div>
-            <div class="row">
-              <label class="body-m text-light" for="days" >How many days are you travelling for?</label>
-            </div>
-            <div class="row mb-5">
-              <input id="days" class="input-field body-m my-4" type="number" name="days" placeholder="Please enter a value between 1 and 15"></input>
-            </div>
-            <div class="row mt-5">
-              <button id="partyNext" class="btn-main body-m text-light text-align-center mx-auto mt-20vh" type="button" name="button">Next</button>
-            </div>
-          </div>
+        <div class="row">
+          <div class="col">
+            <form>
+              <div class="form-group">
+                <label class="" for="people">How many people in your party?</label>
+                <input id="people" class="form-control" type="number" name="people" placeholder="Please enter a value between 1 and 6"></input>
+              </div>
+              <div class="form-group">
+                <label class="" for="days" >How many days are you travelling for?</label>
+                <input id="days" class="form-control" type="number" name="days" placeholder="Please enter a value between 1 and 15"></input>
+              </div>
+              <button id="partyNext" class="btn btn-round btn-lg btn-primary" type="button" name="button">Next</button>
+          </form>
         </div>
       </div>
 
       <!-- party error msg -->
-      <div id="partyError" class="button-box error-position mx-auto">
-        <div class="row">
-          <div id="errorClose" class="error-close-icon error-close-icon-position"></div>
-        </div>
+      <div id="partyError" class="btn btn-primary">
         <div class="row">
           <div class="col">
             <p id="errorMsg" class="body-m text-light"></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <btn id="errorClose" class="btn btn-primary btn-round"> Close</div>
           </div>
         </div>
       </div>
@@ -76,8 +71,27 @@
       <!-- journey inputs -->
       <div id="mapDetails" class="">
         <div class="row">
-          <div class="con">
-            <h3>i am a map</h3>
+          <div class="col">
+            <form >
+              <div class="form-group">
+                <label class="" for="people">Where are you starting?</label>
+                <input id="startInput" class="form-control" type="number" name="start" placeholder="e.g. 'Putaruru'"></input>
+              </div>
+              <div class="form-group">
+                <label class="" for="days">Where are you going?</label>
+                <input id="endInput" class="form-control" type="number" name="end" placeholder="e.g. 'Taihape'"></input>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button id="mapConfirm" class="btn btn-round btn-lg btn-primary" type="button" name="button">Confirm</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div id="map" class="map-container"></div>
           </div>
         </div>
       </div>
@@ -89,5 +103,6 @@
     <script src="js/jquery-3.4.1.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/main.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAinumtT1cwiYz33TxVQA4ypDZ_4PyIDe4&callback=initMap"></script>
   </body>
 </html>
