@@ -60,7 +60,6 @@ $('#mapConfirm').hide();
 
 
 // let's go btn
-
 $('#letsGo').click(function(){
   $('#landingPage').hide();
   $('#partyDetails').show();
@@ -120,17 +119,74 @@ document.getElementById('partyNext').addEventListener('click', function(){
   }
 })
 
-// initialises map
+// map!
 var map;
 
 function initMap(){
   var center = {
-    lat: -40.900558,
-    lng: 174.885971
+    lat: -41.270634,
+    lng: 173.283966
   };
 
-  var map = new google.maps.Map(document.getElementById('map'), {zoom: 5, center: center});
+  var map = new google.maps.Map(document.getElementById('map'), {zoom: 6, center: center});
+
+  var startInput = document.getElementById('startInput');
+  var endInput = document.getElementById('endInput');
+  var startAutocomplete = new google.maps.places.Autocomplete(startInput);
+  var endAutocomplete = new google.maps.places.Autocomplete(endInput);
+
+  var markerA = new google.maps.Marker({map: map , icon: 'assets/a-01.png'});
+  var markerB = new google.maps.Marker({map: map , icon: 'assets/b-02.png'});
+
+  startAutocomplete.bindTo('bounds', map);
+  endAutocomplete.bindTo('bounds', map);
+
+  function setMarker(markerX, autocomplete){
+    autocomplete.addListener('place_changed', function(){
+      var place = autocomplete.getPlace();
+      markerX.setPosition(place.geometry.location);
+      markerX.setVisible(true);
+      map.panTo(place.geometry.location);
+      if (markerA.position && markerB.position) {
+        console.log('got both markers');
+        getDirections();
+      }
+    })
+  }
+
+  setMarker(markerA , startAutocomplete);
+  setMarker(markerB , endAutocomplete);
+
+  function getDirections(){
+    var directionsService = new google.maps.DirectionsService();
+    directionsService.route({
+        origin: markerA.position,
+        destination: markerB.position,
+        travelMode: 'DRIVING'
+    }),
+
+     function(response, status){
+        if(status == 'OK'){
+            // console.log(response.routes[0].legs);
+            for (var i = 0; i < response.routes[0].legs.length; i++) {
+                console.log(response.routes[0].legs[i].distance.text);
+                console.log(response.routes[0].legs[i].duration.text);
+            }
+            directionsDisplay.setDirections(response);
+        } else if(status == 'NOT_FOUND'){
+            console.log('either your origin or destination is invalid');
+        } else if(status == 'ZERO_RESULTS'){
+            alert('sorry there is no routes available');
+        }
+    }
+  }
+
+
+  // get directions rendering between A and B
+  // get directions object
 
 }
+// replaces the async , defer and &callback from our HTML - it was throwing up a weird caching error? Uncaught promise vc?
+google.maps.event.addDomListener(window, "load", initMap);
 
-// turns the input fields into objects that can be operated on by the map
+// outputs
