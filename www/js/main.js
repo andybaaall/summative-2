@@ -111,7 +111,6 @@ document.getElementById('partyNext').addEventListener('click', function(){
       $('#mapDetails').show();
     }
   }
-  console.log(availableCars);
   if (availableCars.length === 0){
     $('#partyNext').hide();
     $('#partyError').show();
@@ -121,6 +120,8 @@ document.getElementById('partyNext').addEventListener('click', function(){
 
 // map!
 var map;
+var distance;
+var time;
 
 function initMap(){
   var center = {
@@ -135,8 +136,8 @@ function initMap(){
   var startAutocomplete = new google.maps.places.Autocomplete(startInput);
   var endAutocomplete = new google.maps.places.Autocomplete(endInput);
 
-  var markerA = new google.maps.Marker({map: map , icon: 'assets/a-01.png'});
-  var markerB = new google.maps.Marker({map: map , icon: 'assets/b-02.png'});
+  var markerA = new google.maps.Marker({map: map});
+  var markerB = new google.maps.Marker({map: map});
 
   startAutocomplete.bindTo('bounds', map);
   endAutocomplete.bindTo('bounds', map);
@@ -148,7 +149,6 @@ function initMap(){
       markerX.setVisible(true);
       map.panTo(place.geometry.location);
       if (markerA.position && markerB.position) {
-        console.log('got both markers');
         getDirections();
       }
     })
@@ -158,35 +158,53 @@ function initMap(){
   setMarker(markerB , endAutocomplete);
 
   function getDirections(){
-    var directionsService = new google.maps.DirectionsService();
-    directionsService.route({
-        origin: markerA.position,
-        destination: markerB.position,
-        travelMode: 'DRIVING'
-    }),
+     // console.log('show me the directions');
+     var directionsService = new google.maps.DirectionsService();
+     directionsDisplay = new google.maps.DirectionsRenderer({});
 
-     function(response, status){
-        if(status == 'OK'){
-            // console.log(response.routes[0].legs);
+     directionsDisplay.setMap(map);
+
+     directionsService.route({
+       origin: markerA.position,
+       destination: markerB.position,
+       travelMode: 'DRIVING'
+     }, function(response, status){
+         if(status == 'OK'){
             for (var i = 0; i < response.routes[0].legs.length; i++) {
-                console.log(response.routes[0].legs[i].distance.text);
-                console.log(response.routes[0].legs[i].duration.text);
-            }
-            directionsDisplay.setDirections(response);
-        } else if(status == 'NOT_FOUND'){
-            console.log('either your origin or destination is invalid');
-        } else if(status == 'ZERO_RESULTS'){
-            alert('sorry there is no routes available');
-        }
-    }
-  }
+             var distance = response.routes[0].legs[i].distance.text;
+             var time = response.routes[0].legs[i].duration.text;
+           }
+           directionsDisplay.setDirections(response);
+         } else {
+           console.log('error message for no routes found!');
+         }
+     })
+    $('#mapConfirm').show();
+   } // getDirections()
+}// initMap
+
+// show vehicles page
+document.getElementById('mapConfirm').addEventListener('click', function(){
+  var vehicle;
+
+  // hide map details
+  // show vehicle details
+  // for each item in the vehicles list, add a div showing data. They all share a class (e.g. carBtn)
+  // show results
+})
+
+// show results page
+document.getElementsByClassName('carBtn').addEventListener('click', function(){
+  // each vehicle 'btn' gets this function - it works out hire cost, petrol cost, time and distance, and prints them into ...
+  // ... the results screen (which includes a 'new trip' button)
+});
 
 
-  // get directions rendering between A and B
-  // get directions object
 
-}
-// replaces the async , defer and &callback from our HTML - it was throwing up a weird caching error? Uncaught promise vc?
+
+
+
+
+
+// replaces the async , defer and &callback from the HTML
 google.maps.event.addDomListener(window, "load", initMap);
-
-// outputs
