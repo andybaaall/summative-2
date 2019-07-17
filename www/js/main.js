@@ -192,19 +192,26 @@ document.getElementById('mapConfirm').addEventListener('click', function(){
   // for each item in the vehicles list, add a div showing data. They all share a class (e.g. carBtn)
   // show results
 })
-
-// show results page
-document.getElementsByClassName('carBtn').addEventListener('click', function(){
-  // each vehicle 'btn' gets this function - it works out hire cost, petrol cost, time and distance, and prints them into ...
-  // ... the results screen (which includes a 'new trip' button)
-});
-
-
-
-
-
+//
+// // show results page
+// document.getElementsByClassName('carBtn').addEventListener('click', function(){
+//   // each vehicle 'btn' gets this function - it works out hire cost, petrol cost, time and distance, and prints them into ...
+//   // ... the results screen (which includes a 'new trip' button)
+// });
+//
+//
+//
+//
+//
 
 
 
 // replaces the async , defer and &callback from the HTML
 google.maps.event.addDomListener(window, "load", initMap);
+
+
+
+// stuff to do:
+// hide in CSS - show in JS.  This will prevent the 'flash' on load
+// bug: if you change route markers, old ones persist. Needs an if(A){clear();}
+// bound autocomplete suggestions to NZ
