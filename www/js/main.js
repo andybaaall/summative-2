@@ -49,21 +49,18 @@ var cars = [
 // vehicles available to the user
 var availableCars = [];
 
-
-// inactive states on load
-$('#partyDetails').hide();
-$('#topRightLogo').hide();
-$('#partyNext').hide();
-$('#partyError').hide();
-$('#mapDetails').hide();
-$('#mapConfirm').hide();
+function showHidden(element){
+  element.removeClass('d-none');
+}
 
 
 // let's go btn
 $('#letsGo').click(function(){
   $('#landingPage').hide();
-  $('#partyDetails').show();
-  $('#topRightLogo').show();
+  showHidden($('#partyDetails'));
+  showHidden($('#topRightLogo'));
+  // $('#partyDetails').show();
+  // $('#topRightLogo').show();
 })
 
 // party details validation
@@ -73,9 +70,16 @@ hasPeople = false;
 hasDays = false;
 
 function validate(owner , min , max){
-  var val = parseInt(owner.value);
+  var val = owner.value;
+
+  // not sure how to prevent and 'e' from being entered as value.
+  if (val % 1 != 0){
+    showHidden($('#partyError'));
+    $('#errorMsg').html('Please enter a whole number between ' + (min + 1) + ' and ' + (max - 1) + ' in the \'how many ' + owner.id + '\' field.');
+  }
+
   if (val <= min || val >= max) {
-    $('#partyError').show();
+    showHidden($('#partyError'));
     $('#errorMsg').html('Please enter a number between ' + (min + 1) + ' and ' + (max - 1) + ' in the \'how many ' + owner.id + '\' field.');
   } else {
     if (owner.id === 'people'){
@@ -85,7 +89,7 @@ function validate(owner , min , max){
     }
   }
   if (hasPeople === true && hasDays === true){
-    $('#partyNext').show();
+    showHidden($('#partyNext'));
   }
 }
 
@@ -99,7 +103,7 @@ days.addEventListener('change', function(){
 
 // closes party details error message
 $('#errorClose').click(function(){
-  $('#partyError').hide();
+  $('#partyError').addClass('d-none');
 })
 
 // determines which cars are available based on party details
@@ -108,7 +112,7 @@ document.getElementById('partyNext').addEventListener('click', function(){
     if ((people.value >= cars[i].minPeople) && (people.value <= cars[i].maxPeople) && (days.value >= cars[i].minDays) && (days.value <= cars[i].maxDays)) {
       availableCars.push(cars[i]);
       $('#partyDetails').hide();
-      $('#mapDetails').show();
+      showHidden($('#mapDetails'));
     }
   }
   if (availableCars.length === 0){
@@ -119,9 +123,15 @@ document.getElementById('partyNext').addEventListener('click', function(){
 })
 
 // map!
+
 var map;
 var distance;
 var time;
+
+var markerA;
+var markerB;
+
+var directionsDisplay;
 
 function initMap(){
   var center = {
@@ -136,15 +146,21 @@ function initMap(){
   var startAutocomplete = new google.maps.places.Autocomplete(startInput);
   var endAutocomplete = new google.maps.places.Autocomplete(endInput);
 
-  var markerA = new google.maps.Marker({map: map});
-  var markerB = new google.maps.Marker({map: map});
+  if (markerA == null) {
+    markerA = new google.maps.Marker({map: map});
+  }
+  if (markerB == null) {
+    markerB = new google.maps.Marker({map: map});
+  }
 
   startAutocomplete.bindTo('bounds', map);
   endAutocomplete.bindTo('bounds', map);
 
+
   function setMarker(markerX, autocomplete){
     autocomplete.addListener('place_changed', function(){
-      var place = autocomplete.getPlace();
+      var place;
+      place = autocomplete.getPlace();
       markerX.setPosition(place.geometry.location);
       markerX.setVisible(true);
       map.panTo(place.geometry.location);
@@ -157,13 +173,14 @@ function initMap(){
   setMarker(markerA , startAutocomplete);
   setMarker(markerB , endAutocomplete);
 
+
   function getDirections(){
-     // console.log('show me the directions');
+    if (directionsDisplay) {
+      directionsDisplay.setMap(null);
+    }
      var directionsService = new google.maps.DirectionsService();
      directionsDisplay = new google.maps.DirectionsRenderer({});
-
      directionsDisplay.setMap(map);
-
      directionsService.route({
        origin: markerA.position,
        destination: markerB.position,
@@ -179,7 +196,7 @@ function initMap(){
            console.log('error message for no routes found!');
          }
      })
-    $('#mapConfirm').show();
+    showHidden($('#mapConfirm'));
    } // getDirections()
 }// initMap
 
@@ -212,6 +229,4 @@ google.maps.event.addDomListener(window, "load", initMap);
 
 
 // stuff to do:
-// hide in CSS - show in JS.  This will prevent the 'flash' on load
-// bug: if you change route markers, old ones persist. Needs an if(A){clear();}
 // bound autocomplete suggestions to NZ

@@ -12,7 +12,7 @@
   </head>
   <body>
     <div class="hero-bg-img z-index-last"></div>
-    <div id="topRightLogo" class="pure-nz-logo-sm t-r-logo-layout">
+    <div id="topRightLogo" class="d-none"> <!-- pure-nz-logo-sm t-r-logo-layout were the classes used here-->
 
     </div>
 
@@ -37,7 +37,7 @@
       </div>
 
       <!-- party input contents -->
-      <div id="partyDetails">
+      <div id="partyDetails" class="d-none">
         <div class="row">
           <div class="col">
             <form>
@@ -49,13 +49,13 @@
                 <label class="" for="days" >How many days are you travelling for?</label>
                 <input id="days" class="form-control" type="number" name="days" placeholder="Please enter a value between 1 and 15"></input>
               </div>
-              <button id="partyNext" class="btn btn-round btn-lg btn-primary" type="button" name="button">Next</button>
+              <button id="partyNext" class="d-none btn btn-round btn-lg btn-primary" type="button" name="button">Next</button>
           </form>
         </div>
       </div>
 
       <!-- party error msg -->
-      <div id="partyError" class="btn btn-primary">
+      <div id="partyError" class="d-none btn btn-primary">
         <div class="row">
           <div class="col">
             <p id="errorMsg" class="body-m text-light"></p>
@@ -69,7 +69,7 @@
       </div>
 
       <!-- journey inputs -->
-      <div id="mapDetails" class="">
+      <div id="mapDetails" class="d-none">
         <div class="row">
           <div class="col">
             <form >
