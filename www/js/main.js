@@ -1,7 +1,11 @@
+// current fuel price in NZD
+var fuelCost = 2.269;
+
 // all vehicles
 var cars = [
   {
     name: 'Motorbike',
+    id: 'Motorbike',
     minPeople: 1,
     maxPeople: 1,
     minDays: 1,
@@ -13,6 +17,7 @@ var cars = [
   },
   {
     name: 'Small car',
+    id: 'SmallCar',
     minPeople: 1,
     maxPeople: 2,
     minDays: 1,
@@ -24,6 +29,7 @@ var cars = [
   },
   {
     name: 'Large car',
+    id: 'LargeCar',
     minPeople: 1,
     maxPeople: 5,
     minDays: 1,
@@ -35,6 +41,7 @@ var cars = [
   },
   {
     name: 'Motor home',
+    id: 'MotorHome',
     minPeople: 2,
     maxPeople: 6,
     minDays: 2,
@@ -143,8 +150,12 @@ function initMap(){
 
   var startInput = document.getElementById('startInput');
   var endInput = document.getElementById('endInput');
-  var startAutocomplete = new google.maps.places.Autocomplete(startInput);
-  var endAutocomplete = new google.maps.places.Autocomplete(endInput);
+  var options = {
+      types: ['(cities)'],
+      componentRestrictions: {country: 'nz'}
+    };
+  var startAutocomplete = new google.maps.places.Autocomplete(startInput , options);
+  var endAutocomplete = new google.maps.places.Autocomplete(endInput , options);
 
   if (markerA == null) {
     markerA = new google.maps.Marker({map: map});
@@ -155,7 +166,6 @@ function initMap(){
 
   startAutocomplete.bindTo('bounds', map);
   endAutocomplete.bindTo('bounds', map);
-
 
   function setMarker(markerX, autocomplete){
     autocomplete.addListener('place_changed', function(){
@@ -188,8 +198,8 @@ function initMap(){
      }, function(response, status){
          if(status == 'OK'){
             for (var i = 0; i < response.routes[0].legs.length; i++) {
-             var distance = response.routes[0].legs[i].distance.text;
-             var time = response.routes[0].legs[i].duration.text;
+             distance = response.routes[0].legs[i].distance.text;
+             time = response.routes[0].legs[i].duration.text;
            }
            directionsDisplay.setDirections(response);
          } else {
@@ -202,31 +212,64 @@ function initMap(){
 
 // show vehicles page
 document.getElementById('mapConfirm').addEventListener('click', function(){
-  var vehicle;
+  $('#mapDetails').hide();
+  showHidden($('#vehicleDetails'));
 
-  // hide map details
-  // show vehicle details
-  // for each item in the vehicles list, add a div showing data. They all share a class (e.g. carBtn)
-  // show results
+  for (var i = 0; i < availableCars.length; i++) {
+    // document.getElementById('vehiclesList').innerHTML += '<div class="row">';
+    // document.getElementById('vehiclesList').innerHTML +=  '<btn id="btn' + availableCars.id + '" class="btn btn-round btn-lg btn-primary">';
+    // document.getElementById('vehiclesList').innerHTML +=    '<h4>' + availableCars.name + '</h4>';
+    // document.getElementById('vehiclesList').innerHTML +=    '<p>$' + availableCars.hire + ' / day</p>';
+    // document.getElementById('vehiclesList').innerHTML +=    '<p>minimum hire ' + availableCars.minDays + '</p>';
+    // document.getElementById('vehiclesList').innerHTML +=    '<p>minimum hire ' + availableCars.minDays + '</p>';
+    // document.getElementById('vehiclesList').innerHTML +=    '<p>maximum hire ' + availableCars.maxDays + '</p>';
+    // document.getElementById('vehiclesList').innerHTML +=    '<p>' + availableCars.fuel + 'L / 100km</p>';
+    // document.getElementById('vehiclesList').innerHTML +=  '</btn>';
+    // document.getElementById('vehiclesList').innerHTML += '</div>';
+
+    document.getElementById('vehiclesList').innerHTML += '<div class="row"><btn id="' + availableCars[i].id + '" class="btn btn-primary btn-round my-2" onclick="carSelect()"> ' + availableCars[i].name + '<br> $' + availableCars[i].hire + ' / day' + '<br>' + availableCars[i].fuel + ' L / 100km </btn></div>';
+  } // availableCars loop
 })
-//
-// // show results page
-// document.getElementsByClassName('carBtn').addEventListener('click', function(){
-//   // each vehicle 'btn' gets this function - it works out hire cost, petrol cost, time and distance, and prints them into ...
-//   // ... the results screen (which includes a 'new trip' button)
-// });
-//
-//
-//
-//
-//
+
+var chosenCar;
+
+function carSelect(){
+  document.addEventListener('click' , function(e){
+
+    for (var i = 0; i < availableCars.length; i++) {
+      if (e.srcElement.id == availableCars[i].id) {
+        // console.log('you clicked on btn' + e.srcElement.id);
+        // console.log('you clicked on array item' + availableCars[i].id);
+        chosenCar = [];
+        chosenCar.push({
+          name: availableCars[i].name,
+          id: availableCars[i].id,
+          minPeople: availableCars[i].minPeople,
+          maxPeople: availableCars[i].maxPeople,
+          minDays: availableCars[i].minDays,
+          maxDays: availableCars[i].maxDays,
+          fuel: availableCars[i].fuel,
+          // fuel is a measurement of L / km
+          hire: availableCars[i].hire
+          // hire is a measurement of $ / day)
+        })
+      } // if
+    } // for loop
+    $('#vehicleDetails').hide();
+    showHidden($('#results'));
+    console.log(chosenCar);
+    document.getElementById('results').innerHTML = '<div class="row">driving distance is ' + distance + '</div><div class="row">driving time is ' + time + '</div> <div class="row">fuel cost is $' + Math.round(((parseInt(distance) / 100) * chosenCar[0].fuel * fuelCost)) + '.00</div><div class="row">hire cost is $' + (chosenCar[0].hire * days.value) + '.00</div><div class="row"><btn onclick="newTrip()" class="btn btn-round btn-primary">New Trip</btn></div>';
+  }) // event listener
+} // carSelect()
+
+
+// 'loading' screen
+
+function newTrip(){
+  console.log('got a click');
+}
 
 
 
 // replaces the async , defer and &callback from the HTML
 google.maps.event.addDomListener(window, "load", initMap);
-
-
-
-// stuff to do:
-// bound autocomplete suggestions to NZ

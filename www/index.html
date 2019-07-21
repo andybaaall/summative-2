@@ -91,18 +91,23 @@
         </div>
         <div class="row">
           <div class="col">
-            <button id="mapConfirm" class="btn btn-round btn-lg btn-primary mt-4" type="button" name="button">Confirm</button>
+            <button id="mapConfirm" class="btn btn-round btn-lg btn-primary mt-4 d-none" type="button" name="button">Confirm</button>
           </div>
         </div>
       </div>
 
 
       <!-- vehicle selection -->
-      <div id="vehicleDetails">
+      <div id="vehicleDetails" class="d-none">
         <div class="row">
-          <div id="vehiclesList" class="col">
-            <!-- vehicles are rendered here, by showVehicles(); -->
-          </div>
+          <div id="vehiclesList" class="col"></div>
+        </div>
+      </div>
+
+      <!-- results -->
+      <div id="results" class="d-none">
+        <div class="row">
+          <div id="resultsList" class="col"> results </div>
         </div>
       </div>
     </div>
