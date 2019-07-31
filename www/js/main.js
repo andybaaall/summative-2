@@ -60,14 +60,14 @@ function showHidden(element){
   element.removeClass('d-none');
 }
 
-
 // let's go btn
 $('#letsGo').click(function(){
+  console.log('got a click');
   $('#landingPage').hide();
-  showHidden($('#partyDetails'));
-  showHidden($('#topRightLogo'));
-  // $('#partyDetails').show();
-  // $('#topRightLogo').show();
+  // showHidden($('#partyDetails'));
+  $('#partyDetails').show();
+  // document.getElementById('landingPage').style.display = 'block';
+
 })
 
 // party details validation
@@ -216,17 +216,6 @@ document.getElementById('mapConfirm').addEventListener('click', function(){
   showHidden($('#vehicleDetails'));
 
   for (var i = 0; i < availableCars.length; i++) {
-    // document.getElementById('vehiclesList').innerHTML += '<div class="row">';
-    // document.getElementById('vehiclesList').innerHTML +=  '<btn id="btn' + availableCars.id + '" class="btn btn-round btn-lg btn-primary">';
-    // document.getElementById('vehiclesList').innerHTML +=    '<h4>' + availableCars.name + '</h4>';
-    // document.getElementById('vehiclesList').innerHTML +=    '<p>$' + availableCars.hire + ' / day</p>';
-    // document.getElementById('vehiclesList').innerHTML +=    '<p>minimum hire ' + availableCars.minDays + '</p>';
-    // document.getElementById('vehiclesList').innerHTML +=    '<p>minimum hire ' + availableCars.minDays + '</p>';
-    // document.getElementById('vehiclesList').innerHTML +=    '<p>maximum hire ' + availableCars.maxDays + '</p>';
-    // document.getElementById('vehiclesList').innerHTML +=    '<p>' + availableCars.fuel + 'L / 100km</p>';
-    // document.getElementById('vehiclesList').innerHTML +=  '</btn>';
-    // document.getElementById('vehiclesList').innerHTML += '</div>';
-
     document.getElementById('vehiclesList').innerHTML += '<div class="row"><btn id="' + availableCars[i].id + '" class="btn btn-primary btn-round my-2" onclick="carSelect()"> ' + availableCars[i].name + '<br> $' + availableCars[i].hire + ' / day' + '<br>' + availableCars[i].fuel + ' L / 100km </btn></div>';
   } // availableCars loop
 })
@@ -238,8 +227,6 @@ function carSelect(){
 
     for (var i = 0; i < availableCars.length; i++) {
       if (e.srcElement.id == availableCars[i].id) {
-        // console.log('you clicked on btn' + e.srcElement.id);
-        // console.log('you clicked on array item' + availableCars[i].id);
         chosenCar = [];
         chosenCar.push({
           name: availableCars[i].name,
@@ -249,15 +236,12 @@ function carSelect(){
           minDays: availableCars[i].minDays,
           maxDays: availableCars[i].maxDays,
           fuel: availableCars[i].fuel,
-          // fuel is a measurement of L / km
           hire: availableCars[i].hire
-          // hire is a measurement of $ / day)
-        })
+        }) // push()
       } // if
     } // for loop
     $('#vehicleDetails').hide();
     showHidden($('#results'));
-    console.log(chosenCar);
     document.getElementById('results').innerHTML = '<div class="row">driving distance is ' + distance + '</div><div class="row">driving time is ' + time + '</div> <div class="row">fuel cost is $' + Math.round(((parseInt(distance) / 100) * chosenCar[0].fuel * fuelCost)) + '.00</div><div class="row">hire cost is $' + (chosenCar[0].hire * days.value) + '.00</div><div class="row"><btn onclick="newTrip()" class="btn btn-round btn-primary">New Trip</btn></div>';
   }) // event listener
 } // carSelect()
@@ -266,7 +250,8 @@ function carSelect(){
 // 'loading' screen
 
 function newTrip(){
-  console.log('got a click');
+  $('#results').hide();
+  $('#landingPage').show();
 }
 
 
