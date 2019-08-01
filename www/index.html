@@ -12,7 +12,7 @@
   </head>
   <body>
     <div class="hero-bg-img z-index-last"></div>
-    <div id="topRightLogo" class="d-none"> <!-- pure-nz-logo-sm t-r-logo-layout were the classes used here-->
+    <div id="topRightLogo"> <!-- pure-nz-logo-sm t-r-logo-layout were the classes used here-->
 
     </div>
 
@@ -26,7 +26,7 @@
         </div>
         <div class="row">
           <div class="col mb-5">
-            <h3 class="">Your road trip starts here.</h3>
+            <h3>Your road trip starts here.</h3>
           </div>
         </div>
         <div class="row mt-5">
@@ -37,25 +37,25 @@
       </div>
 
       <!-- party input contents -->
-      <div id="partyDetails" class="d-none">
+      <div id="partyDetails">
         <div class="row">
           <div class="col">
             <form>
               <div class="form-group">
-                <label class="" for="people">How many people in your party?</label>
+                <label for="people">How many people in your party?</label>
                 <input id="people" class="form-control" type="number" name="people" placeholder="Please enter a value between 1 and 6"></input>
               </div>
               <div class="form-group">
-                <label class="" for="days" >How many days are you travelling for?</label>
+                <label for="days" >How many days are you travelling for?</label>
                 <input id="days" class="form-control" type="number" name="days" placeholder="Please enter a value between 1 and 15"></input>
               </div>
-              <button id="partyNext" class="d-none btn btn-round btn-lg btn-primary" type="button" name="button">Next</button>
+              <button id="partyNext" class=" btn btn-round btn-lg btn-primary" type="button" name="button">Next</button>
           </form>
         </div>
       </div>
 
       <!-- party error msg -->
-      <div id="partyError" class="d-none btn btn-primary">
+      <div id="partyError" class="btn btn-primary">
         <div class="row">
           <div class="col">
             <p id="errorMsg" class="body-m text-light"></p>
@@ -63,22 +63,22 @@
         </div>
         <div class="row">
           <div class="col-6">
-            <btn id="errorClose" class="btn btn-primary btn-round"> Close</div>
+            <btn id="errorClose" class="btn btn-primary btn-round">Close</div>
           </div>
         </div>
       </div>
 
       <!-- journey inputs -->
-      <div id="mapDetails" class="d-none">
+      <div id="mapDetails">
         <div class="row">
           <div class="col">
             <form >
               <div class="form-group">
-                <label class="" for="people">Where are you starting?</label>
+                <label for="people">Where are you starting?</label>
                 <input id="startInput" class="form-control" type="text" name="start" placeholder="e.g. 'Putaruru'"></input>
               </div>
               <div class="form-group">
-                <label class="" for="days">Where are you going?</label>
+                <label for="days">Where are you going?</label>
                 <input id="endInput" class="form-control" type="text" name="end" placeholder="e.g. 'Taihape'"></input>
               </div>
             </form>
@@ -91,25 +91,26 @@
         </div>
         <div class="row">
           <div class="col">
-            <button id="mapConfirm" class="btn btn-round btn-lg btn-primary mt-4 d-none" type="button" name="button">Confirm</button>
+            <button id="mapConfirm" class="btn btn-round btn-lg btn-primary mt-4 " type="button" name="button">Confirm</button>
           </div>
         </div>
       </div>
 
 
       <!-- vehicle selection -->
-      <div id="vehicleDetails" class="d-none">
+      <div id="vehicleDetails">
         <div class="row">
           <div id="vehiclesList" class="col"></div>
         </div>
       </div>
 
       <!-- results -->
-      <div id="results" class="d-none">
+      <div id="results">
         <div class="row">
           <div id="resultsList" class="col"> results </div>
         </div>
       </div>
+      <btn id="newTripBtn" class="btn btn-round btn-primary">New Trip</btn>
     </div>
 
 
@@ -118,6 +119,7 @@
     <script src="js/bootstrap.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAinumtT1cwiYz33TxVQA4ypDZ_4PyIDe4&libraries=places"></script>
     <script src="js/main.js"></script>
+
 
 
 

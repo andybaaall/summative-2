@@ -56,9 +56,17 @@ var cars = [
 // vehicles available to the user
 var availableCars = [];
 
-function showHidden(element){
-  element.removeClass('d-none');
-}
+// function showHidden(element){
+//   element.removeClass('d-none');
+// }
+
+$('#partyDetails').hide();
+$('#partyError').hide();
+$('#mapDetails').hide();
+$('#vehicleDetails').hide();
+$('#results').hide();
+$('#newTripBtn').hide();
+
 
 // let's go btn
 $('#letsGo').click(function(){
@@ -81,12 +89,12 @@ function validate(owner , min , max){
 
   // not sure how to prevent and 'e' from being entered as value.
   if (val % 1 != 0){
-    showHidden($('#partyError'));
+    $('#partyError').show();
     $('#errorMsg').html('Please enter a whole number between ' + (min + 1) + ' and ' + (max - 1) + ' in the \'how many ' + owner.id + '\' field.');
   }
 
   if (val <= min || val >= max) {
-    showHidden($('#partyError'));
+    $('#partyError').show();
     $('#errorMsg').html('Please enter a number between ' + (min + 1) + ' and ' + (max - 1) + ' in the \'how many ' + owner.id + '\' field.');
   } else {
     if (owner.id === 'people'){
@@ -96,7 +104,7 @@ function validate(owner , min , max){
     }
   }
   if (hasPeople === true && hasDays === true){
-    showHidden($('#partyNext'));
+    $('#partyNext').show();
   }
 }
 
@@ -110,7 +118,7 @@ days.addEventListener('change', function(){
 
 // closes party details error message
 $('#errorClose').click(function(){
-  $('#partyError').addClass('d-none');
+  $('#partyError').hide();
 })
 
 // determines which cars are available based on party details
@@ -119,7 +127,7 @@ document.getElementById('partyNext').addEventListener('click', function(){
     if ((people.value >= cars[i].minPeople) && (people.value <= cars[i].maxPeople) && (days.value >= cars[i].minDays) && (days.value <= cars[i].maxDays)) {
       availableCars.push(cars[i]);
       $('#partyDetails').hide();
-      showHidden($('#mapDetails'));
+      $('#mapDetails').show();
     }
   }
   if (availableCars.length === 0){
@@ -206,14 +214,14 @@ function initMap(){
            console.log('error message for no routes found!');
          }
      })
-    showHidden($('#mapConfirm'));
+    $('#mapConfirm').show();
    } // getDirections()
 }// initMap
 
 // show vehicles page
 document.getElementById('mapConfirm').addEventListener('click', function(){
   $('#mapDetails').hide();
-  showHidden($('#vehicleDetails'));
+  $('#vehicleDetails').show();
 
   for (var i = 0; i < availableCars.length; i++) {
     document.getElementById('vehiclesList').innerHTML += '<div class="row"><btn id="' + availableCars[i].id + '" class="btn btn-primary btn-round my-2" onclick="carSelect()"> ' + availableCars[i].name + '<br> $' + availableCars[i].hire + ' / day' + '<br>' + availableCars[i].fuel + ' L / 100km </btn></div>';
@@ -241,8 +249,9 @@ function carSelect(){
       } // if
     } // for loop
     $('#vehicleDetails').hide();
-    showHidden($('#results'));
-    document.getElementById('results').innerHTML = '<div class="row">driving distance is ' + distance + '</div><div class="row">driving time is ' + time + '</div> <div class="row">fuel cost is $' + Math.round(((parseInt(distance) / 100) * chosenCar[0].fuel * fuelCost)) + '.00</div><div class="row">hire cost is $' + (chosenCar[0].hire * days.value) + '.00</div><div class="row"><btn onclick="newTrip()" class="btn btn-round btn-primary">New Trip</btn></div>';
+    $('#results').show();
+    $('#results').html('<div class="row">driving distance is ' + distance + '</div><div class="row">driving time is ' + time + '</div> <div class="row">fuel cost is $' + Math.round(((parseInt(distance) / 100) * chosenCar[0].fuel * fuelCost)) + '.00</div><div class="row">hire cost is $' + (chosenCar[0].hire * days.value) + '.00</div><div class="row"></div>');
+    $('#newTripBtn').show();
   }) // event listener
 } // carSelect()
 
@@ -250,11 +259,15 @@ function carSelect(){
 // 'loading' screen
 
 function newTrip(){
-  $('#results').hide();
-  $('#landingPage').show();
+  console.log('clicked newTrip');
+  // $('#results').hide(); // this doesn't work - why?
+  $('#landingPage').show(); // this works
+  $('#newTripBtn').hide(); // this doesn't work - why?
 }
 
-
+document.getElementById('newTripBtn').addEventListener('click', function(){
+  newTrip();
+})
 
 // replaces the async , defer and &callback from the HTML
 google.maps.event.addDomListener(window, "load", initMap);
