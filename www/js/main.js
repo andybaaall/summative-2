@@ -58,7 +58,6 @@ var availableCars = [];
 
 // let's go btn
 $('#letsGo').click(function(){
-  console.log(markerA.position);
   $('#landingPage').addClass('d-none');
   $('#partyDetails').removeClass('d-none');
 })
@@ -124,7 +123,6 @@ document.getElementById('partyNext').addEventListener('click', function(){
 
 // map!
 
-var map;
 var distance;
 var time;
 
@@ -242,8 +240,8 @@ function carSelect(e){
   $('#newTripBtn').removeClass('d-none');
 } // carSelect()
 
-// $.fakeLoader();
 // 'loading' screen
+
 
 function newTrip(){
   $('#vehiclesList').empty();
