@@ -58,6 +58,7 @@ var availableCars = [];
 
 // let's go btn
 $('#letsGo').click(function(){
+  console.log(markerA.position);
   $('#landingPage').addClass('d-none');
   $('#partyDetails').removeClass('d-none');
 })
@@ -220,50 +221,51 @@ document.getElementById('mapConfirm').addEventListener('click', function(){
 var chosenCar;
 
 function carSelect(e){
-    for (var i = 0; i < availableCars.length; i++) {
-      if (e.id == availableCars[i].id) {
-        chosenCar = [];
-        chosenCar.push({
-          name: availableCars[i].name,
-          id: availableCars[i].id,
-          minPeople: availableCars[i].minPeople,
-          maxPeople: availableCars[i].maxPeople,
-          minDays: availableCars[i].minDays,
-          maxDays: availableCars[i].maxDays,
-          fuel: availableCars[i].fuel,
-          hire: availableCars[i].hire
-        }) // push()
-      } // if
-    } // for loop
-    $('#vehicleDetails').addClass('d-none');
-    $('#fakeLoader').removeClass('d-none');
-
-    var loadTimeOut = 1500;
-
-    $.fakeLoader({
-      timeToHide: loadTimeOut,
-      bgColor: 'rgba(0, 123, 255, 0.6)'
-    });
-
-    setTimeout(function(){
-      $('#results').removeClass('d-none');
-      $('#results').html('<div class="row">driving distance is ' + distance + '</div><div class="row">driving time is ' + time + '</div> <div class="row">fuel cost is $' + Math.round(((parseInt(distance) / 100) * chosenCar[0].fuel * fuelCost)) + '.00</div><div class="row">hire cost is $' + (chosenCar[0].hire * days.value) + '.00</div><div class="row"></div>');
-      $('#newTripBtn').removeClass('d-none');
-    }, loadTimeOut);
+  for (var i = 0; i < availableCars.length; i++) {
+    if (e.id == availableCars[i].id) {
+      chosenCar = [];
+      chosenCar.push({
+        name: availableCars[i].name,
+        id: availableCars[i].id,
+        minPeople: availableCars[i].minPeople,
+        maxPeople: availableCars[i].maxPeople,
+        minDays: availableCars[i].minDays,
+        maxDays: availableCars[i].maxDays,
+        fuel: availableCars[i].fuel,
+        hire: availableCars[i].hire
+      }) // push()
+    } // if
+  } // for loop
+  $('#vehicleDetails').addClass('d-none');
+  $('#results').removeClass('d-none');
+  $('#results').html('<div class="row">driving distance is ' + distance + '</div><div class="row">driving time is ' + time + '</div> <div class="row">fuel cost is $' + Math.round(((parseInt(distance) / 100) * chosenCar[0].fuel * fuelCost)) + '.00</div><div class="row">hire cost is $' + (chosenCar[0].hire * days.value) + '.00</div><div class="row"></div>');
+  $('#newTripBtn').removeClass('d-none');
 } // carSelect()
 
 // $.fakeLoader();
 // 'loading' screen
 
 function newTrip(){
+  $('#vehiclesList').empty();
   $('#results').addClass('d-none');
   $('#landingPage').removeClass('d-none');
   $('#newTripBtn').addClass('d-none');
+
+  // clearing input fields and associated arrays
   people.value = '';
   days.value = '';
   startInput.value = '';
   endInput.value = '';
   availableCars = [];
+  chosenCar = [];
+
+  // clearing map
+  directionsDisplay.setMap(null);
+  markerA.setMap(null);
+  markerB.setMap(null);
+  markerA.position = null;
+  markerB.position = null;
+  initMap();
 }
 
 document.getElementById('newTripBtn').addEventListener('click', function(){
