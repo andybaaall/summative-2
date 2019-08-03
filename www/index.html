@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="css/bootstrap.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="node_modules/jq-fakeloader/dist/fakeLoader.min.css">
     <link rel="stylesheet" href="css/master.css">
   </head>
   <body>
@@ -37,7 +38,7 @@
       </div>
 
       <!-- party input contents -->
-      <div id="partyDetails">
+      <div id="partyDetails" class="d-none">
         <div class="row">
           <div class="col">
             <form>
@@ -49,27 +50,27 @@
                 <label for="days" >How many days are you travelling for?</label>
                 <input id="days" class="form-control" type="number" name="days" placeholder="Please enter a value between 1 and 15"></input>
               </div>
-              <button id="partyNext" class=" btn btn-round btn-lg btn-primary" type="button" name="button">Next</button>
+              <button id="partyNext" class="btn btn-round btn-lg btn-primary d-none" type="button" name="button">Next</button>
           </form>
         </div>
       </div>
 
       <!-- party error msg -->
-      <div id="partyError" class="btn btn-primary">
+      <div id="partyError" class="btn btn-primary d-none">
         <div class="row">
           <div class="col">
-            <p id="errorMsg" class="body-m text-light"></p>
+            <p id="partyErrorMsg" class="body-m text-light"></p>
           </div>
         </div>
         <div class="row">
           <div class="col-6">
-            <btn id="errorClose" class="btn btn-primary btn-round">Close</div>
+            <btn id="partyErrorClose" class="btn btn-primary btn-round">Close</div>
           </div>
         </div>
       </div>
 
       <!-- journey inputs -->
-      <div id="mapDetails">
+      <div id="mapDetails" class="d-none">
         <div class="row">
           <div class="col">
             <form >
@@ -94,30 +95,60 @@
             <button id="mapConfirm" class="btn btn-round btn-lg btn-primary mt-4 " type="button" name="button">Confirm</button>
           </div>
         </div>
-      </div>
-
-
-      <!-- vehicle selection -->
-      <div id="vehicleDetails">
         <div class="row">
-          <div id="vehiclesList" class="col"></div>
+          <div class="col">
+            <div id="mapError" class="btn btn-primary d-none">
+              <div class="row">
+                <div class="col">
+                  <p id="errorMsg" class="body-m text-light"></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <btn id="mapErrorClose" class="btn btn-primary btn-round">Close</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- vehicle selection -->
+        <div id="vehicleDetails" class="d-none">
+          <div class="row">
+            <div id="vehiclesList" class="col"></div>
+          </div>
+        </div>
+
+        <!-- loading scn -->
+        <div id="fakeLoader" class="fakeLoader d-none"></div>
+
+        <!-- results -->
+        <div id="results" class="d-none">
+          <div class="row">
+            <div class="col">
+              <div id="resultsList" class="col"> results </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <btn id="newTripBtn" class="btn btn-round btn-primary d-none">New Trip</btn>
+          </div>
+        </div>
+
       </div>
 
-      <!-- results -->
-      <div id="results">
-        <div class="row">
-          <div id="resultsList" class="col"> results </div>
-        </div>
-      </div>
-      <btn id="newTripBtn" class="btn btn-round btn-primary">New Trip</btn>
-    </div>
+
+
+
+
 
 
     <script src="js/popper.min.js"></script>
     <script src="js/jquery-3.4.1.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAinumtT1cwiYz33TxVQA4ypDZ_4PyIDe4&libraries=places"></script>
+    <script src="node_modules/jq-fakeloader/dist/fakeLoader.min.js"></script>
     <script src="js/main.js"></script>
 
 

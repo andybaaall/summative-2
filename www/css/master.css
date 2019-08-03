@@ -3,3 +3,7 @@
   width: 75vw;
   background-color: lightGrey;
 }
+
+.loadingMsg {
+  z-index: 2
+}
