@@ -245,7 +245,7 @@ function carSelect(e){
       bgColor: 'rgba(0, 123, 255, 0.6)'
     });
 
-    setInterval(function(){
+    setTimeout(function(){
       $('#results').removeClass('d-none');
       $('#results').html('<div class="row">driving distance is ' + distance + '</div><div class="row">driving time is ' + time + '</div> <div class="row">fuel cost is $' + Math.round(((parseInt(distance) / 100) * chosenCar[0].fuel * fuelCost)) + '.00</div><div class="row">hire cost is $' + (chosenCar[0].hire * days.value) + '.00</div><div class="row"></div>');
       $('#newTripBtn').removeClass('d-none');
