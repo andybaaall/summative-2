@@ -243,20 +243,6 @@ function carSelect(element){
 
 
 function newTrip(){
-<<<<<<< HEAD
-  console.log('clicked newTrip');
-  $('#results').hide(); // this doesn't work - why?
-  $('#landingPage').show(); // this works
-  $('#newTripBtn').hide(); // this doesn't work - why?
-}
-
-document.getElementById('newTripBtn').addEventListener('click', function(){
-  newTrip();
-})
-
-// replaces the async , defer and &callback from the HTML
-google.maps.event.addDomListener(window, "load", initMap);
-=======
   $('#vehiclesList').empty();
   $('#results').addClass('d-none');
   $('#landingPage').removeClass('d-none');
@@ -285,4 +271,3 @@ document.getElementById('newTripBtn').addEventListener('click', function(){
 
 // replaces the async , defer and &callback from the script tag
 google.maps.event.addDomListener(window, 'load', initMap);
->>>>>>> b983d02c237cc78830198cb7a7c3ea53a82af9b0
