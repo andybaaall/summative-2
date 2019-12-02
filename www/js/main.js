@@ -266,9 +266,9 @@ function newTrip(){
   $('#newTripBtn').hide(); // this doesn't work - why?
 }
 
-// document.getElementById('newTripBtn').addEventListener('click', function(){
-//   newTrip();
-// })
+document.getElementById('newTripBtn').addEventListener('click', function(){
+  newTrip();
+})
 
 // replaces the async , defer and &callback from the HTML
 google.maps.event.addDomListener(window, "load", initMap);
